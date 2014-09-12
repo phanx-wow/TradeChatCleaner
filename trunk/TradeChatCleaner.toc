@@ -1,0 +1,25 @@
+## Interface: 50400
+## Version: ALPHA
+
+## Title: Trade Chat Cleaner
+## Notes: Removes spam and irrelevant chatter from chat.
+## Notes-deDE: Entfernt die Spam und das unerhebliche Geschwätz aus dem Chatfenster.
+## Notes-esES: Elimina el spam y la charla irrelevante de la ventana de chat.
+## Notes-esMX: Elimina el spam y la charla irrelevante de la ventana de chat.
+
+## Author: Phanx
+## X-Email: addons@phanx.net
+## X-Copyright: Copyright (c) 2013-2014 Phanx. All rights reserved.
+## X-License: See the accompanying LICENSE file for details.
+## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW
+## X-Localizations: enUS, deDE
+## X-Website: 
+## X-Curse-Project-ID: 
+## X-WoWI-ID: 
+
+## SavedVariables: ChatCleanerBlacklist, ChatCleanerWhitelist
+
+Strings.lua
+
+Addon.lua
+Options.lua
