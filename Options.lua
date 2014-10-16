@@ -147,25 +147,29 @@ Whitelist.acceptButton:SetScript("OnClick", function(this)
 
 	local _, lineHeight = Whitelist:GetFontObject():GetFont()
  	Whitelist:SetHeight(lineHeight * #ChatCleanerWhitelist)
-
 	Whitelist.scrollFrame:SetVerticalScroll(0)
 end)
 
 function Options:refresh()
-	local _, lineHeight = Blacklist:GetFontObject():GetFont()
 	Blacklist:ClearFocus()
 	table.sort(ChatCleanerBlacklist)
 	Blacklist:SetText(table.concat(ChatCleanerBlacklist, "\n"))
+	local _, lineHeight = Blacklist:GetFontObject():GetFont()
  	Blacklist:SetHeight(lineHeight * #ChatCleanerBlacklist)
+	Blacklist.scrollFrame:SetVerticalScroll(0)
 
-	local _, lineHeight = Whitelist:GetFontObject():GetFont()
 	Whitelist:ClearFocus()
 	table.sort(ChatCleanerWhitelist)
 	Whitelist:SetText(table.concat(ChatCleanerWhitelist, "\n"))
+	local _, lineHeight = Whitelist:GetFontObject():GetFont()
  	Whitelist:SetHeight(lineHeight * #ChatCleanerWhitelist)
+	Whitelist.scrollFrame:SetVerticalScroll(0)
 end
+
+Options:SetScript("OnShow", Options.refresh)
 
 SLASH_TRADECHATCLEANER1 = "/tcc"
 SlashCmdList.TRADECHATCLEANER = function()
+	InterfaceOptionsFrame_OpenToCategory(Options)
 	InterfaceOptionsFrame_OpenToCategory(Options)
 end

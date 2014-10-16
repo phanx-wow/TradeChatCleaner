@@ -61,7 +61,7 @@ ChatCleanerBlacklist = {
 	"a?m[eu]rican?", -- america, american, murica
 	"an[au][ls]e?r?%f[%L]", -- anal, anus, -e/er/es/en
 	"argument",
-	"aus[st]?[ir]?[ea]?l?i?a?n?%f[%L]", -- aus, aussie, australia, australian
+	-- "aus[st]?[ir]?[ea]?l?i?a?n?%f[%L]", -- aus, aussie, australia, australian -- "aus" is problematic in DE
 	"bacon",
 	"bewbs",
 	"boobs",
