@@ -3,7 +3,7 @@ Trade Chat Cleaner
 
 Removes spam and irrelevant chatter from chat.
 
-Messages in Trade chat are blocked, unless they contain at least one 
+Messages in Trade chat are blocked, unless they contain at least one
 whitelisted word *and* do not contain any blacklisted words.
 
 The blacklist (but not the whitelist) is also applied to General chat.
@@ -24,10 +24,12 @@ Preconfigured with keywords for English and Deutsch.
 Feedback
 -----------
 
-This addon is an unreleased alpha version, and is not meant for general
-public use. Use it at your own risk. Absolutely no feature requests will
-be considered. Feel free to suggest keywords, especially for languages
-not listed above.
+Post a ticket on either download site, or a comment on WoWInterface.
+
+If you are reporting a bug, please include directions I can follow to
+reproduce the bug, whether it still happens when all other addons are
+disabled, and the exact text of the related error message (if any) from
+[Bugger](http://www.wowinterface.com/downloads/info23144-Bugger.html).
 
 If you need to contact me, you can send me a private message
 on either download site, or email me at <addons@phanx.net>.
