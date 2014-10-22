@@ -25,6 +25,9 @@ ChatCleanerWhitelist = {
 
 ChatCleanerBlacklist = {
 	-- real spam
+	"%.c0m%f[%L]",
+	"%d%s?eur%f[%L]",
+	"%d%s?usd%f[%L]",
 	"account",
 	"boost",
 	"diablo",
