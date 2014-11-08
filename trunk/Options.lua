@@ -1,3 +1,18 @@
+--[[--------------------------------------------------------------------
+	Trade Chat Cleaner
+	Removes spam and irrelevant chatter from Trade chat.
+	Copyright (c) 2013-2014 Phanx <addons@phanx.net>. All rights reserved.
+	http://www.wowinterface.com/downloads/info23178-TradeChatCleaner.html
+	http://www.curse.com/addons/wow/tradechatcleaner
+
+	Please DO NOT upload this addon to other websites, or post modified
+	versions of it. However, you are welcome to use any/all of its code
+	in your own addon, as long as you do not use my name or the name of
+	this addon ANYWHERE in your addon, including in its name, outside of
+	an optional attribution. You are also welcome to include this addon
+	WITHOUT CHANGES in compilations posted on Curse and/or WoWInterface.
+----------------------------------------------------------------------]]
+
 local NAME, L = ...
 
 local Options = CreateFrame("Frame", NAME.."Options", InterfaceOptionsFramePanelContainer)
