@@ -1,5 +1,5 @@
 ## Interface: 60000
-## Version: 6.0.2.wowi:revision BETA
+## Version: 6.0.2.wowi:revision
 
 ## Title: Trade Chat Cleaner
 ## Notes: Removes spam and irrelevant chatter from Trade chat.
@@ -9,13 +9,13 @@
 
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright (c) 2013-2014 Phanx. All rights reserved.
-## X-License: See the accompanying LICENSE file for details.
+## X-Copyright: Copyright (c) 2013-2014 Phanx.
+## X-License: All rights reserved.
 ## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW
 ## X-Localizations: enUS, deDE
-## X-Website:
-## X-Curse-Project-ID:
-## X-WoWI-ID:
+## X-Website: http://www.wowinterface.com/downloads/info23178-TradeChatCleaner.html
+## X-Curse-Project-ID: tradechatcleaner
+## X-WoWI-ID: 23178
 
 ## SavedVariables: ChatCleanerBlacklist, ChatCleanerWhitelist
 
