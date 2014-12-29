@@ -131,15 +131,22 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", function(_, _, message, send
 	if not strfind(channelName, TRADE) then
 		return
 	end
-
+	
+	-- Check for whitelisted words
+	local hasWhitelistedWord = false
 	local whitelist = ChatCleanerWhitelist
 	for i = 1, #whitelist do
 		if strfind(search, whitelist[i]) then
 			-- print("Whitelisted:", whitelist[i])
-			-- Remove extra spaces
-			message = strtrim(gsub(message, "%s%s+", " "))
-			return false, message, sender, arg3, arg4, arg5, flag, channelID, arg8, channelName, arg10, lineID, ...
+			hasWhitelistedWord = true
 		end
+	end
+	
+	-- If the whitelist is empty, treat everything as whitelisted
+	if hasWhitelistedWord or #whitelist == 0 then
+		-- Remove extra spaces
+		message = strtrim(gsub(message, "%s%s+", " "))
+		return false, message, sender, arg3, arg4, arg5, flag, channelID, arg8, channelName, arg10, lineID, ...
 	end
 
 	-- print("Other.")
