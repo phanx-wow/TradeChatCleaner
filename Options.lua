@@ -145,8 +145,10 @@ local function RefreshEditBoxFromList(editBoxName, listName)
 	editBoxName:ClearFocus()
 	editBoxName:SetText(table.concat(listName, "\n"))
 	
-	local _, lineHeight = editBoxName:GetFontObject():GetFont()
- 	editBoxName:SetHeight(lineHeight * #listName)
+	if #listName > 0 then
+		local _, lineHeight = editBoxName:GetFontObject():GetFont()
+		editBoxName:SetHeight(lineHeight * #listName)
+	end
 	editBoxName.scrollFrame:SetVerticalScroll(0)
 end
 
