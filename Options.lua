@@ -109,7 +109,6 @@ local function MakeMultiLineEditBox(name)
 	end)
 
 	function edit:SetPoint(point, relativeTo, relativePoint, x, y)
-		print("SetPoint", tostringall(point, relativeTo, relativePoint, x, y))
 		if relativeTo == nil or type(relativeTo) == "number" then
 			-- "TOPLEFT", x, y
 			point, relativeTo, relativePoint, x, y = point, Options, point, relativeTo, relativePoint
@@ -127,7 +126,6 @@ local function MakeMultiLineEditBox(name)
 		elseif strmatch(point, "BOTTOM") then
 			y = (y or 0) + 1 + accept:GetHeight()
 		end
-		print("      =>", tostringall(point, relativeTo, relativePoint, x, y))
 		bg:SetPoint(point, relativeTo, relativePoint, x or 0, y or 0)
 	end
 
