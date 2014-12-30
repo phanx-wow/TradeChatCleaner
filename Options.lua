@@ -129,18 +129,6 @@ Blacklist.bg:SetPoint("TOPLEFT", Blacklist.label, "BOTTOMLEFT", -4, 0)
 Blacklist.bg:SetPoint("TOPRIGHT", Blacklist.label, "BOTTOMRIGHT", 4, 0)
 Blacklist.bg:SetPoint("BOTTOMLEFT", Options, 16, 16 + 4 + 20)
 
-Blacklist.acceptButton:SetScript("OnClick", function(this)
-	Blacklist:SetCursorPosition(0)
-	Blacklist:ClearFocus()
-	FillListFromText(ChatCleanerBlacklist, Blacklist:GetText())
-	Blacklist:SetText(table.concat(ChatCleanerBlacklist, "\n"))
-
-	local _, lineHeight = Blacklist:GetFontObject():GetFont()
- 	Blacklist:SetHeight(lineHeight * #ChatCleanerBlacklist)
-
-	Blacklist.scrollFrame:SetVerticalScroll(0)
-end)
-
 local Whitelist = MakeMultiLineEditBox("Whitelist")
 Options.Whitelist = Whitelist
 
@@ -152,33 +140,42 @@ Whitelist.bg:SetPoint("TOPLEFT", Whitelist.label, "BOTTOMLEFT", -4, 0)
 Whitelist.bg:SetPoint("TOPRIGHT", Whitelist.label, "BOTTOMRIGHT", 4, 0)
 Whitelist.bg:SetPoint("BOTTOMRIGHT", Options, -16, 16 + 4 + 20)
 
-Whitelist.acceptButton:SetScript("OnClick", function(this)
-	Whitelist:SetCursorPosition(0)
-	Whitelist:ClearFocus()
-	FillListFromText(ChatCleanerWhitelist, Whitelist:GetText())
-	Whitelist:SetText(table.concat(ChatCleanerWhitelist, "\n"))
+local function RefreshEditBoxFromList(editBoxName, listName)
+	editBoxName:SetCursorPosition(0)
+	editBoxName:ClearFocus()
+	editBoxName:SetText(table.concat(listName, "\n"))
+	
+	if #listName > 0 then
+		local _, lineHeight = editBoxName:GetFontObject():GetFont()
+		editBoxName:SetHeight(lineHeight * #listName)
+	end
+	editBoxName.scrollFrame:SetVerticalScroll(0)
+end
 
-	local _, lineHeight = Whitelist:GetFontObject():GetFont()
- 	Whitelist:SetHeight(lineHeight * #ChatCleanerWhitelist)
-	Whitelist.scrollFrame:SetVerticalScroll(0)
+local function RefreshBlacklist()
+	RefreshEditBoxFromList(Blacklist, ChatCleanerBlacklist)
+end
+
+local function RefreshWhitelist()
+	RefreshEditBoxFromList(Whitelist, ChatCleanerWhitelist)
+end
+
+Blacklist.acceptButton:SetScript("OnClick", function(this)
+	FillListFromText(ChatCleanerBlacklist, Blacklist:GetText())
+	RefreshBlacklist()
+end)
+
+Whitelist.acceptButton:SetScript("OnClick", function(this)
+	FillListFromText(ChatCleanerWhitelist, Whitelist:GetText())
+	RefreshWhitelist()
 end)
 
 function Options:refresh()
-	Blacklist:SetCursorPosition(0)
-	Blacklist:ClearFocus()
 	table.sort(ChatCleanerBlacklist)
-	Blacklist:SetText(table.concat(ChatCleanerBlacklist, "\n"))
-	local _, lineHeight = Blacklist:GetFontObject():GetFont()
- 	Blacklist:SetHeight(lineHeight * #ChatCleanerBlacklist)
-	Blacklist.scrollFrame:SetVerticalScroll(0)
+	RefreshBlacklist()
 
-	Whitelist:SetCursorPosition(0)
-	Whitelist:ClearFocus()
 	table.sort(ChatCleanerWhitelist)
-	Whitelist:SetText(table.concat(ChatCleanerWhitelist, "\n"))
-	local _, lineHeight = Whitelist:GetFontObject():GetFont()
- 	Whitelist:SetHeight(lineHeight * #ChatCleanerWhitelist)
-	Whitelist.scrollFrame:SetVerticalScroll(0)
+	RefreshWhitelist()
 end
 
 Options:SetScript("OnShow", Options.refresh)
