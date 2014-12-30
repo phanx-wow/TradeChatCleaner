@@ -11,61 +11,67 @@ local _, L = ...
 
 ChatCleanerWhitelist = {
 	"|h", -- links
-	"^wt[bst]",
-	"^lf[gm%d%s]",
 	"dps",
 	"ffa",
 	"flex",
 	"free ?roll",
-	"kaufe", -- de
-	"gall?e?o?n?",
 	"he[ai]l",
 	"heroic",
+	"%f[%a]lf[gmw%d]%f[%A]", -- lfg, lfm, lfw
+	"kaufe", -- de
 	"mog run",
-	"nala?k?",
-	"oond?a?s?t?a?",
+	"mythic",
 	"reserve",
 	"s[cz]ena?r?i?o?", -- en/de
+	"style ?ru[ns]h?", -- en/de
 	"transmog",
 	"%f[%a]vk%f[%A]", -- de
-	"%f[%a]sha%f[%A]",
 	"tank",
+	"trash farm",
+	"world ?boss",
+	"^wt[bst]",
 }
 
 ChatCleanerBlacklist = {
 	-- real spam
-	"%.c0m%f[%L]",
-	"%d%s?eur%f[%L]",
-	"%d%s?usd%f[%L]",
+	"%.c0m%f[%A]",
+	"%d%s?eur%f[%A]",
+	"%d%s?usd%f[%A]",
 	"account",
 	"boost",
+	"delivery",
 	"diablo",
 	"elite gear",
 	"game ?time",
 	"g0ld",
 	"name change",
 	"paypal",
+	"professional",
 	"qq",
 	"ranking",
 	"realm",
+	"selfplay",
 	"server",
 	"share",
 	"s%A*k%A*y%A*p%Ae", -- spammers love to obfuscate "skype"
 	"transfer",
 	"wow gold",
 	-- pvp
-	"%f[%d][235]s%f[%L]", -- 2s, 3s, 5s
 	"[235]v[235]",
 	"%f[%a]arena", -- arenacap, arenamate, arenapoints
-	"%f[%l]carry%f[%L]",
+	"%f[%a]carry%f[%A]",
+	"%f[%a]cr%f[%A]",
+	"%f[%d][235]s%f[%A]", -- 2s, 3s, 5s
 	"conqu?e?s?t? cap",
 	"conqu?e?s?t? points",
 	"for %ds",
 	"lf %ds",
 	"low mmr",
+	"partner",
 	"points cap",
 	"punktecap", -- DE
-	"pusc?h", -- DE
+	"pvp ?mate",
+	"rating",
 	"rbg",
 	"season",
 	"weekly cap",
@@ -73,7 +79,8 @@ ChatCleanerBlacklist = {
 	"a?m[eu]rican?", -- america, american, murica
 	"an[au][ls]e?r?%f[%L]", -- anal, anus, -e/er/es/en
 	"argument",
-	-- "aus[st]?[ir]?[ea]?l?i?a?n?%f[%L]", -- aus, aussie, australia, australian -- "aus" is problematic in DE
+	"aussie",
+	"australi",
 	"bacon",
 	"bewbs",
 	"boobs",
@@ -81,10 +88,11 @@ ChatCleanerBlacklist = {
 	"girl",
 	"kiss",
 	"mad ?bro",
+	"muslim",
 	"nigg[ae]r?",
 	"obama",
 	"pussy",
-	"sexy?",
+	"sexy",
 	"shut ?up",
 	"tits",
 	"twitch%.tv",
@@ -92,64 +100,71 @@ ChatCleanerBlacklist = {
 	"wts.+guild",
 	"xbox",
 	"youtu%.?be",
+	"y?o?ur? m[ao]mm?a",
+	"y?o?ur? m[ou]th[ae]r",
+	"youtube",
+	-- TCG codes
+	"hippogryph hatchling",
+	"mottled drake",
+	"rocket chicken",
 }
 
 local TRADE = L.Trade
 local reqLatin = not strmatch(GetLocale(), "^[rkz][uoh]")
 
-local strfind, strlower, type = string.find, string.lower, type
+local strmatch, strlower, type = string.match, string.lower, type
 
-local prevID, result
+local prevID, result, prevText
 ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", function(_, _, message, sender, arg3, arg4, arg5, flag, channelID, arg8, channelName, arg10, lineID, ...)
 	if lineID == prevID then
-		return result
+		if result == true then
+			return result
+		else
+			return false, result, sender, arg3, arg4, arg5, flag, channelID, arg8, channelName, arg10, lineID, ...
+		end
 	end
-	prevID, result = lineID, nil
+	prevID, result = lineID, true
 
 	-- Don't filter custom channels
 	if channelID == 0 or type(channelID) ~= "number" then return end
 
-	local search = strlower(message)
+	local search = gsub(strlower(message), "\124h", strupper)
 
-	-- Hide ASCII crap.
-	if reqLatin and not strfind(search, "[a-z]") then
-		-- print("No letters.")
-		result = true
+	-- Hide ASCII art crap
+	if reqLatin and not strmatch(search, "[a-z]") then
+		--print("No letters")
 		return true
 	end
 
 	local blacklist = ChatCleanerBlacklist
 	for i = 1, #blacklist do
-		if strfind(search, blacklist[i]) then
-			-- print("Blacklisted.")
-			result = true
+		if strmatch(search, blacklist[i]) then
+			--print("Blacklisted:", channelID, blacklist[i])
+			--print("  ", search)
 			return true
 		end
 	end
 
-	-- Apply only the blacklist to non-Trade channels
-	if not strfind(channelName, TRADE) then
-		return
-	end
-	
-	-- Check for whitelisted words
-	local hasWhitelistedWord = false
+	-- Remove extra spaces
+	message = strtrim(gsub(message, "%s%s+", " "))
+
 	local whitelist = ChatCleanerWhitelist
-	for i = 1, #whitelist do
-		if strfind(search, whitelist[i]) then
-			-- print("Whitelisted:", whitelist[i])
-			hasWhitelistedWord = true
+	local pass = #whitelist == 0 or not strmatch(channelName, TRADE)
+	if not pass then
+		for i = 1, #whitelist do
+			if strmatch(search, whitelist[i]) then
+				--print("Whitelisted:", whitelist[i])
+				pass = true
+				break
+			end
 		end
 	end
-	
-	-- If the whitelist is empty, treat everything as whitelisted
-	if hasWhitelistedWord or #whitelist == 0 then
-		-- Remove extra spaces
-		message = strtrim(gsub(message, "%s%s+", " "))
+	if pass then
+		--print("Passed")
+		result = message
 		return false, message, sender, arg3, arg4, arg5, flag, channelID, arg8, channelName, arg10, lineID, ...
 	end
 
-	-- print("Other.")
-	result = true
+	--print("Other:", channelID, search)
 	return true
 end)
