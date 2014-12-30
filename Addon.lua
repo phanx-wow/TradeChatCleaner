@@ -94,6 +94,8 @@ ChatCleanerBlacklist = {
 	"youtu%.?be",
 }
 
+WhitelistAllNumberedChannels = true
+
 local TRADE = L.Trade
 local reqLatin = not strmatch(GetLocale(), "^[rkz][uoh]")
 
@@ -126,9 +128,9 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", function(_, _, message, send
 			return true
 		end
 	end
-
-	-- Apply only the blacklist to non-Trade channels
-	if not strfind(channelName, TRADE) then
+	
+	-- Don't apply the whitelist to non-Trade channels if WhitelistAllNumberedChannels is false
+	if not WhitelistAllNumberedChannels and not strfind(channelName, TRADE) then
 		return
 	end
 	
