@@ -125,8 +125,16 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", function(_, _, message, send
 	end
 	prevID, result = lineID, true
 
+	--Support for the TradeForwarder plugin
+	if strfind(channelName, "TCForwarder") then
+		--TradeForwarder "commands" begin with "^LFW" and should be ignored
+		if strfind(message, "^LFW") then
+			return
+		end
 	-- Don't filter custom channels
-	if channelID == 0 or type(channelID) ~= "number" then return end
+	elseif channelID == 0 or type(channelID) ~= "number" then
+		return
+	end
 
 	local search = gsub(strlower(message), "\124h", strupper)
 
