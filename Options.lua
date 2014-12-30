@@ -184,7 +184,15 @@ Whitelist:SetPoint("BOTTOMRIGHT", -16, 16)
 Whitelist.label:SetText(L.Whitelist)
 Options.Whitelist = Whitelist
 
-Blacklist.acceptButton:SetScript("OnClick", function(self)
+local CheckboxWhitelistChannels = CreateFrame("CheckButton", "$parentCheckboxWhitelistChannels", Options, "ChatConfigCheckButtonTemplate")
+CheckboxWhitelistChannels:SetScript("OnClick", function(this)
+	WhitelistAllNumberedChannels = CheckboxWhitelistChannels:GetChecked()
+end)
+_G[CheckboxWhitelistChannels:GetName().."Text"]:SetText(L.CheckboxWhitelistChannelsLabel)
+CheckboxWhitelistChannels.tooltip = L.CheckboxWhitelistChannelsTooltip
+CheckboxWhitelistChannels:SetPoint("TOPLEFT", 316, -62)
+
+Blacklist.acceptButton:SetScript("OnClick", function(this)
 	FillListFromText(ChatCleanerBlacklist, Blacklist:GetText())
 	Options:refresh()
 end)
@@ -200,6 +208,8 @@ function Options:refresh()
 
 	table.sort(ChatCleanerWhitelist)
 	FillEditBoxFromList(Whitelist, ChatCleanerWhitelist)
+	
+	CheckboxWhitelistChannels:SetChecked(WhitelistAllNumberedChannels)
 end
 
 Options:refresh()

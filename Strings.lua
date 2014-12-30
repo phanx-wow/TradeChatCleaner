@@ -13,6 +13,8 @@ L.Trade = "Trade"
 L.Blacklist = "Blacklisted Words"
 L.Whitelist = "Whitelisted Words"
 L.Description = "Messages in Trade chat are blocked unless they contain at least one whitelisted word |cffffd200and|r do not contain any blacklisted words. The blacklist (but not the whitelist) is also applied to General chat."
+L.CheckboxWhitelistChannelsLabel = " Whitelist all numbered channels"
+L.CheckboxWhitelistChannelsTooltip = "When enabled, the whitelist applies to all numbered chat channels. When disabled, it only applies to Trade chat."
 
 local LOC = GetLocale()
 if LOC == "deDE" then
