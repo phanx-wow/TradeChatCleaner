@@ -140,7 +140,7 @@ Options:SetScript("OnShow", function()
 
 	local function FillEditBoxFromList(editBox, list)
 		editBox:ClearFocus()
-		editBox:SetText(table.concat(list, "\n"))
+		editBox:SetText(gsub(table.concat(list, "\n"), "|", "||")) -- WoW editboxes are stupid
 		editBox:SetCursorPosition(0)
 		editBox.scrollFrame:SetVerticalScroll(0)
 	end
@@ -148,7 +148,8 @@ Options:SetScript("OnShow", function()
 	local function FillListFromText(list, text)
 		wipe(list)
 
-		text = gsub(text .. "\n", "([^%%|]%u)", strlower)
+		text = gsub(text .. "\n", "([^%%]%u)", strlower)
+		text = gsub(text, "||", "|") -- WoW editboxes are stupid
 		for line in gmatch(text, "[^\n]+") do
 			line = strtrim(line)
 			if strlen(line) > 0 then
