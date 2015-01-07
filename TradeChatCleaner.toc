@@ -1,5 +1,5 @@
 ## Interface: 60000
-## Version: 6.0.2.7
+## Version: @project-version@
 
 ## Title: Trade Chat Cleaner
 ## Notes: Removes spam and irrelevant chatter from Trade chat.
