@@ -46,6 +46,7 @@ ChatCleanerBlacklist = {
 	"%d%s?usd%f[%A]",
 	"account",
 	"boost",
+	"cs[:;]go%f[%A]", -- seems to be the new hype
 	"delivery",
 	"diablo",
 	"elite gear",
