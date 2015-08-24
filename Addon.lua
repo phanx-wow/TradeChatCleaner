@@ -11,30 +11,33 @@ local _, L = ...
 
 ChatCleanerWhitelist = {
 	"|h", -- links
-	"%f[%a]rukh", -- rukh, rukhan
+	"%f[%a]lf[gmw%d%s]", -- lfg, lfm, lfw, lf5, lf ...
+	"%f[%a]wt[bst]", -- wtb, wts, wtt
+	"%f[%a]sell",
 	"blingtron",
 	"dps",
 	"drov",
 	"ffa",
-	"flex",
 	"free ?roll",
+	"gold ?run",
 	"he[ai]l",
 	"heroic",
-	"%f[%a]lf[gmw%d]?%f[%A]", -- lfg, lfm, lfw, lf5, lf ___
 	"kaufe", -- de
-	"mog run",
+	"mog ?run",
+	"mount",
 	"mythic",
 	"reserve",
+	"rukh", -- rukh, rukhan
 	"s[cz]ena?r?i?o?", -- en/de
+	"suche", -- de
 	"style ?ru[ns]h?", -- en/de
+	"tank",
 	"tar[il]na", -- tarlna, but people are dumb and also write tarina
 	"transmog",
-	"%f[%a]vk%f[%A]", -- de
-	"tank",
 	"trash farm",
-	"weltboss",
+	"vk", -- de
+	"weltboss", -- de
 	"world ?boss",
-	"^wt[bst]", -- wtb, wts, wtt
 }
 
 ChatCleanerBlacklist = {
