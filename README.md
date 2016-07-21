@@ -7,3 +7,4 @@ Trade Chat Cleaner
 
 * [Download on Curse](http://www.curse.com/addons/wow/tradechatcleaner/)
 * [Download on WoWInterface](http://www.wowinterface.com/downloads/info23178-TradeChatCleaner.html)
+

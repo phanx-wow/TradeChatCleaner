@@ -1,3 +1,7 @@
+### Version 7.0.3.0 (2016 Jul 24)
+
+* Updated for WoW 7.0
+
 ### Version 6.0.3.3 (2015 Jan 16)
 
 * Removing all words from the whitelist no longer causes all messages to be filtered
