@@ -3,7 +3,7 @@
 	Removes spam and irrelevant chatter from Trade chat.
 	Copyright (c) 2013-2016 Phanx <addons@phanx.net>. All rights reserved.
 	http://www.wowinterface.com/downloads/info23178-TradeChatCleaner.html
-	http://www.curse.com/addons/wow/tradechatcleaner
+	https://mods.curse.com/addons/wow/tradechatcleaner
 	https://github.com/Phanx/TradeChatCleaner
 ----------------------------------------------------------------------]]
 
