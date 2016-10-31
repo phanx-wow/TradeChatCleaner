@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 70100
 ## Version: @project-version@
 
 ## Title: Trade Chat Cleaner
@@ -11,6 +11,8 @@
 ## X-Email: addons@phanx.net
 ## X-Copyright: Copyright (c) 2013-2016 Phanx. All rights reserved.
 ## X-Website: https://github.com/Phanx/TradeChatCleaner
+## X-Curse-Project-ID: tradechatcleaner
+## X-WoWI-ID: 23178
 
 ## SavedVariables: ChatCleanerBlacklist, ChatCleanerWhitelist
 
